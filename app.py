@@ -24,6 +24,10 @@ app.secret_key = 'development key'
 
 HOST_URL = "http://192.168.99.100/"
 
+@app.route("/id/<id>", methods=['GET', 'POST'])
+def id():
+	return ""
+
 @app.route("/hello")
 def hello():
 	result = db.resturants.insert_one({"name":"test"})
@@ -107,8 +111,8 @@ def dashboard():
 
 		return "done"
 
-@app.route('/usr/<username>')
-def user_form(username, methods=['GET', 'POST']):
+@app.route('/usr/<username>', methods=['GET', 'POST'])
+def user_form(username):
 		cursor = db.users.find({"email":username})
 		userinfo = cursor[0]
 
@@ -121,8 +125,8 @@ def user_form(username, methods=['GET', 'POST']):
 		return render_template("user_form.html", user=userinfo)
 
 """
-@app.route('/usr/<username>/add')
-def user_form_submit(username, method='GET'):
+@app.route('/usr/<username>/add', method='GET')
+def user_form_submit(username):
 	return "hello world"
 	if not 'suggestor' in session:
 		session['suggestor'] = uuid.uuid4()
