@@ -57,5 +57,8 @@ def home():
 def generate_label(identifer):
 	return render_template("label.txt", info=model.infoForItem(identifer))
 
+# print label command to implement - curl 192.168.99.100/print/test > /dev/tcp/10.0.0.51/2501
+
+
 if __name__ == "__main__":
     app.run()
