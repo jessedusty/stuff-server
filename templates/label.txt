@@ -1,0 +1,13 @@
+CT~~CD,~CC^~CT~
+^XA~TA000~JSA^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR4,4~SD17^JUS^LRN^CI0^XZ
+^XA
+^MMT
+^PW456
+^LL0253
+^LS0
+^FT21,65^A0N,28,28^FH\^FD{{info.title}}^FS
+^FT21,235^BQN,2,4
+^FDLA,https://stuff.littlebencreations.com/key/{{info.key}}^FS
+^FT169,218^A0N,28,28^FH\^FD{{info.key}}^FS
+^FT176,112^A0N,23,24^FH\^FD{{info.description}}^FS
+^PQ1,0,1,Y^XZ

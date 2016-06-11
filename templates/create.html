@@ -74,13 +74,44 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">{{info}}</h2> <br>
+                    <h2 class="section-heading">Insert new item : {{identifer}}</h2> <br>
                     <style>
                       td {
                         padding: 10px;
                         font-size: 25px;
                       }
                     </style>
+                    <form role="form" action="/add" method="POST">
+                      <style>
+                        .form-control {
+                          width:100%;
+                          margin: auto;
+                        }
+                        input {
+                          margin: 10px;
+                        }
+                      </style>
+                      <hr>
+                      <table align="center" style="text-align:left">
+                        <tr>
+                          <td>Key</td><td><input type="text" class="form-control" name="key" placeholder="Identifier" value="{{ identifer }}"> </td>
+                        </tr>
+                        <tr>
+                          <td>Title</td><td><input type="text" class="form-control" name="title" placeholder="Title"> </td>
+                        </tr>
+                        <tr>
+                          <td>Description</td><td><textarea rows="4" cols="15" class="form-control">Insert Description Here</textarea></td>
+                        </tr>
+                        <tr>
+                          <td>Image</td><td><input type="file" class="form-control" name="picture" /></td>
+                        </tr>
+                        <tr>
+                           <td>Contianed in</td><td><input type="text" class="form-control" name="parent" placeholder="unknown" /></td>
+                        </tr>
+                      </table>
+
+                      <input type="submit" class="btn btn-info btn-xl" value="Add Item">
+                    </form>
 
 
 
