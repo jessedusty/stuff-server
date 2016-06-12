@@ -81,7 +81,7 @@
                         font-size: 25px;
                       }
                     </style>
-                    <form role="form" action="/add" method="POST">
+                    <form role="form" action="/add" method="POST" enctype="multipart/form-data">
                       <style>
                         .form-control {
                           width:100%;
@@ -100,7 +100,7 @@
                           <td>Title</td><td><input type="text" class="form-control" name="title" placeholder="Title"> </td>
                         </tr>
                         <tr>
-                          <td>Description</td><td><textarea rows="4" cols="15" class="form-control">Insert Description Here</textarea></td>
+                          <td>Description</td><td><textarea rows="4" name="description" cols="15" class="form-control">Insert Description Here</textarea></td>
                         </tr>
                         <tr>
                           <td>Image</td><td><input type="file" class="form-control" name="picture" /></td>

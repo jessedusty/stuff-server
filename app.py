@@ -36,9 +36,21 @@ def show_object_for_key(identifer):
 @app.route("/add", methods=["GET", "POST"])
 def add_unknown_item():
 	if request.method == "POST":
-		return "inserted data into database, would you like to print label?"
-	else:
-		return "new label dialog"
+		#model.insertItem(model.handlePOST(request.form))
+		data = model.handlePOST(request.form)
+		data["picture"] = request.files["picture"].read()
+
+
+		model.insertItem(data)
+		return str(data)
+
+		#f = request.files['picture']
+		#return str(request.files["picture"].read())
+
+		return redirect(url_for("show_object_for_key", identifer=request.form["key"]))
+
+
+	return redirect(url_for("insert_item", identifer=""))
 
 @app.route('/add/<identifer>')
 def insert_item(identifer):

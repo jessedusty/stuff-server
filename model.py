@@ -17,3 +17,10 @@ def itemExists(identifer):
 
 def insertItem(info):
     db.items.insert_one(info)
+
+def handlePOST(request_form):
+    d =  dict(request_form)
+    nd = {}
+    for key in d:
+        nd[key] = d[key][0]
+    return nd
