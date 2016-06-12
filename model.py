@@ -1,8 +1,12 @@
 from pymongo import MongoClient
+import gridfs
+from bson.objectid import ObjectId
+
 print("started mongo client")
 client = MongoClient("mongodb://db")
 
 db = client.stuff
+fs = gridfs.GridFS(db)
 
 def infoForItem(identifer):
     index = db.items.find({"key":identifer})

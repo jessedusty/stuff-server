@@ -1,8 +1,10 @@
-from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
+from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, Response
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from pymongo import MongoClient
 
+from bson.objectid import ObjectId
 
 import logging
 import uuid
@@ -71,6 +73,16 @@ def generate_label(identifer):
 
 # print label command to implement - curl 192.168.99.100/print/test > /dev/tcp/10.0.0.51/2501
 
+@app.route('/uploads/<identifer>')
+def get_upload(identifer):
+	return Response(model.fs.get(ObjectId(identifer)).read(), mimetype="image/jpeg")
+	#return "get " + identifer
+
+@app.route('/uploads', methods=['POST'])
+def save_upload():
+	return str(model.fs.put(request.files['picture']))
+	#return "test2"
+
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
