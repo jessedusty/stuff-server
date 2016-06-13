@@ -106,7 +106,8 @@
                           <td>Image</td><td><input type="file" class="form-control" name="picture" /></td>
                         </tr>
                         <tr>
-                           <td>Contianed in</td><td><input type="text" class="form-control" name="parent" placeholder="unknown" /></td>
+                           <!--<td>Contianed in</td><td><input type="text" class="form-control" name="parent" placeholder="unknown" /></td>-->
+                           <td>Contained in</td><td><input type="text" id="ajax" list="json-datalist" placeholder="e.g. datalist"><datalist id="json-datalist"></datalist></td>
                         </tr>
                       </table>
 
@@ -120,6 +121,54 @@
         </div>
     </section>
 
+    <!-- Load "contained" list -->
+    <!--
+    <script>
+      $(document).ready(function () {
+        console.log("testing")
+          var options = {};
+          options.url = "/key";
+          options.type = "GET";
+          //options.data = { "criteria": $("#companyName").val() };
+          options.dataType = "json";
+          options.success = function (data) {
+              console.log(data)
+              $("#json-datalist").empty();
+              for(var i=0;i<data.length;i++)
+              {
+                  $("#json-datalist").append("<option value='" +
+                  data[i].CompanyName + "'></option>");
+              }
+          };
+          options.failure = function(data) {
+              console.log(error);
+          }
+
+          $.ajax(options);
+    });
+</script>-->
+
+<script>
+$(document).ready(function () {
+  httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = function(){
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      // everything is good, the response is received
+      console.log("good");
+      console.log(httpRequest.responseText);
+      var object = jQuery.parseJSON(httpRequest.responseText);
+      console.log(object);
+    } else {
+        // still not ready
+        console.log("no good");
+    }
+  };
+  httpRequest.open('GET', "/ajax/keys.json");
+  httpRequest.send();
+
+});
+
+</script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/static/js/bootstrap.min.js"></script>

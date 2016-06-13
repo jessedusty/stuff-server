@@ -28,3 +28,6 @@ def handlePOST(request_form):
     for key in d:
         nd[key] = d[key][0]
     return nd
+
+def getKeys():
+    return db.items.distinct("key")
