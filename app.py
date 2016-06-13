@@ -40,11 +40,11 @@ def add_unknown_item():
 	if request.method == "POST":
 		#model.insertItem(model.handlePOST(request.form))
 		data = model.handlePOST(request.form)
-		data["picture"] = request.files["picture"].read()
+		data["picture"] = "/image/" + str(model.fs.put(request.files['picture']))
 
 
 		model.insertItem(data)
-		return str(data)
+		#return str(data)
 
 		#f = request.files['picture']
 		#return str(request.files["picture"].read())
@@ -73,7 +73,7 @@ def generate_label(identifer):
 
 # print label command to implement - curl 192.168.99.100/print/test > /dev/tcp/10.0.0.51/2501
 
-@app.route('/uploads/<identifer>')
+@app.route('/image/<identifer>')
 def get_upload(identifer):
 	return Response(model.fs.get(ObjectId(identifer)).read(), mimetype="image/jpeg")
 	#return "get " + identifer

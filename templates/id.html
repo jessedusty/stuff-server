@@ -74,14 +74,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">{{info.title}}</h2> <br>
+                    <h2 class="section-heading">{{info.title}} <small>{{info.key}}</small></h2>
+                    <h2>Location<small><a href="/key/{{info.parent}}">{{info.parent}}</a>"</small></h2>
+                    <p style="color:grey">
+                      {{info.description}}
+                    </p>
                     <style>
                       td {
                         padding: 10px;
                         font-size: 25px;
                       }
                     </style>
-                    <img src="{{info.picture}}" />
+                    <img src="{{info.picture}}" width="75%"/>
 
 
                 </div>
