@@ -50,22 +50,17 @@ def add_unknown_item():
 		#return str(request.files["picture"].read())
 
 		return redirect(url_for("show_object_for_key", identifer=request.form["key"]))
-
-
-	return redirect(url_for("insert_item", identifer=""))
+	else:
+		return render_template("create.html", identifer="")
 
 @app.route('/add/<identifer>')
 def insert_item(identifer):
 	#return "adding " + str(identifer)
 	return render_template("create.html", identifer=identifer)
 
-@app.route("/hello")
-def hello():
-	return render_template("id.html")
-
 @app.route("/")
 def home():
-	return str("home")
+	return render_template("home.html")
 
 @app.route("/print/<identifer>")
 def generate_label(identifer):
