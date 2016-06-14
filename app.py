@@ -37,7 +37,7 @@ def show_object_for_key(identifer):
 
 @app.route('/ajax/keys.json')
 def get_all_keys():
-	return Response({"\"keys\":" + str(model.getKeys()) + "}", mimetype="application/json")
+	return Response("{\"keys\":" + model.getKeys() + "}", mimetype="application/json")
 
 @app.route("/add", methods=["GET", "POST"])
 def add_unknown_item():

@@ -30,4 +30,4 @@ def handlePOST(request_form):
     return nd
 
 def getKeys():
-    return db.items.distinct("key")
+    return str(db.items.distinct("key")).replace("\'", "\"")
