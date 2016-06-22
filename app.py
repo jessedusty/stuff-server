@@ -66,6 +66,11 @@ def home():
 	return render_template("home.html")
 
 
+@app.route("/print")
+def print_page():
+	return render_template("print.html")
+
+
 @app.route("/print/<identifer>")
 def generate_label(identifer):
 	return render_template("label.txt", info=model.infoForItem(identifer))
@@ -81,6 +86,16 @@ def get_upload(identifer):
 @app.route('/uploads', methods=['POST'])
 def save_upload():
 	return str(model.fs.put(request.files['picture'], content_type=request.files["picture"].content_type))
+
+
+@app.route("/search")
+def search_items():
+	return render_template("search.html")
+
+
+@app.route("/list")
+def list_items():
+	return render_template("list.html")
 
 
 if __name__ == "__main__":
