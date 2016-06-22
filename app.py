@@ -44,7 +44,7 @@ def add_unknown_item():
 	if request.method == "POST":
 		#model.insertItem(model.handlePOST(request.form))
 		data = model.handlePOST(request.form)
-		data["picture"] = "/image/" + str(model.fs.put(request.files['picture']))
+		data["picture"] = "/image/" + str(model.fs.put(request.files['picture'], content_type=request.files["picture"].content_type))
 
 
 		model.insertItem(data)
@@ -74,13 +74,13 @@ def generate_label(identifer):
 
 @app.route('/image/<identifer>')
 def get_upload(identifer):
-	return Response(model.fs.get(ObjectId(identifer)).read(), mimetype="image/jpeg")
+	return Response(model.fs.get(ObjectId(identifer)).read(), content_type=model.fs.get(ObjectId(identifer)).content_type)
+	#return str(model.fs.get(ObjectId(identifer)).content_type)
 	#return "get " + identifer
 
 @app.route('/uploads', methods=['POST'])
 def save_upload():
-	return str(model.fs.put(request.files['picture']))
-	#return "test2"
+	return str(model.fs.put(request.files['picture'], content_type=request.files["picture"].content_type))
 
 
 if __name__ == "__main__":
