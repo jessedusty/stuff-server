@@ -55,8 +55,11 @@ def add_unknown_item():
 
 @app.route('/add/<identifer>')
 def insert_item(identifer):
-	#return "adding " + str(identifer)
-	return render_template("create.html", identifer=identifer)
+	if model.itemExists(identifer):
+		return redirect(url_for("show_object_for_key", identifer=identifer))
+	else:
+		return render_template("create.html", identifer=identifer)
+
 
 @app.route("/")
 def home():
