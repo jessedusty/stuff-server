@@ -26,6 +26,7 @@ app.secret_key = 'development key'
 
 HOST_URL = "http://192.168.99.100/"
 
+
 @app.route('/key/<identifer>')
 def show_object_for_key(identifer):
     # show the user profile for that user
@@ -35,9 +36,11 @@ def show_object_for_key(identifer):
 	return render_template("id.html", info=model.infoForItem(identifer))
     #return 'User %s' % identifer
 
+
 @app.route('/ajax/keys.json')
 def get_all_keys():
 	return Response("{\"keys\":" + model.getKeys() + "}", mimetype="application/json")
+
 
 @app.route("/add", methods=["GET", "POST"])
 def add_unknown_item():
@@ -57,6 +60,7 @@ def add_unknown_item():
 	else:
 		return render_template("create.html", identifer="")
 
+
 @app.route('/add/<identifer>')
 def insert_item(identifer):
 	#return "adding " + str(identifer)
@@ -66,17 +70,20 @@ def insert_item(identifer):
 def home():
 	return render_template("home.html")
 
+
 @app.route("/print/<identifer>")
 def generate_label(identifer):
 	return render_template("label.txt", info=model.infoForItem(identifer))
 
 # print label command to implement - curl 192.168.99.100/print/test > /dev/tcp/10.0.0.51/2501
 
+
 @app.route('/image/<identifer>')
 def get_upload(identifer):
 	return Response(model.fs.get(ObjectId(identifer)).read(), content_type=model.fs.get(ObjectId(identifer)).content_type)
 	#return str(model.fs.get(ObjectId(identifer)).content_type)
 	#return "get " + identifer
+
 
 @app.route('/uploads', methods=['POST'])
 def save_upload():
