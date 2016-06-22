@@ -29,12 +29,10 @@ HOST_URL = "http://192.168.99.100/"
 
 @app.route('/key/<identifer>')
 def show_object_for_key(identifer):
-    # show the user profile for that user
 	if not model.itemExists(identifer):
 		return redirect(url_for("insert_item", identifer=identifer))
 
 	return render_template("id.html", info=model.infoForItem(identifer))
-    #return 'User %s' % identifer
 
 
 @app.route('/ajax/keys.json')
@@ -45,16 +43,10 @@ def get_all_keys():
 @app.route("/add", methods=["GET", "POST"])
 def add_unknown_item():
 	if request.method == "POST":
-		#model.insertItem(model.handlePOST(request.form))
 		data = model.handlePOST(request.form)
 		data["picture"] = "/image/" + str(model.fs.put(request.files['picture'], content_type=request.files["picture"].content_type))
 
-
 		model.insertItem(data)
-		#return str(data)
-
-		#f = request.files['picture']
-		#return str(request.files["picture"].read())
 
 		return redirect(url_for("show_object_for_key", identifer=request.form["key"]))
 	else:
@@ -81,8 +73,6 @@ def generate_label(identifer):
 @app.route('/image/<identifer>')
 def get_upload(identifer):
 	return Response(model.fs.get(ObjectId(identifer)).read(), content_type=model.fs.get(ObjectId(identifer)).content_type)
-	#return str(model.fs.get(ObjectId(identifer)).content_type)
-	#return "get " + identifer
 
 
 @app.route('/uploads', methods=['POST'])
