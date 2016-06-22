@@ -1,3 +1,62 @@
 {% extends "layout.html" %}
 
-<!-- TODO: implement listing --> 
+{% block content %}
+
+
+<section>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 text-center">
+              <style>
+                td {
+                  padding: 10px;
+                  font-size: 20px;
+                }
+              </style>
+
+              <h2>List of all items</h2>
+
+              <table style="border-bottom: 1px solid #ddd;">
+                <tr style="font-weight:bold; font-size:25px">
+                  <td>Key</td>
+                  <td>Title</td>
+                  <td>Description</td>
+                  <td>Parent</td>
+                </tr>
+                {% for info in items %}
+                <tr style="text-align:left" class='clickable-row' data-href='/key/{{info.key}}'>
+                  <td>{{info.key}}</td>
+                  <td>{{info.title}}</td>
+                  <td>{{info.description}}</td>
+                  <td>{{info.parent}}</td>
+                </tr>
+                {% else %}
+                <tr>
+                  No data availible
+                </tr>
+                {% endfor %}
+              </table>
+
+
+          </div>
+      </div>
+  </div>
+
+</section>
+
+{% endblock %}
+
+{% block script %}
+
+  <script>
+    $(document).ready(function () {
+      $(".clickable-row").click(function() {
+              //window.document.location = $(this).data("href");
+              window.open($(this).data("href"), "", "width=497,height=644");
+      });
+    });
+
+
+  </script>
+{% endblock %}

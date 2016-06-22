@@ -95,7 +95,7 @@ def search_items():
 
 @app.route("/list")
 def list_items():
-	return render_template("list.html")
+	return render_template("list.html", items=model.getAllItems())
 
 
 if __name__ == "__main__":

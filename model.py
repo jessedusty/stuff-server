@@ -35,3 +35,7 @@ def handlePOST(request_form):
 
 def getKeys():
     return str(db.items.distinct("key")).replace("\'", "\"")
+
+
+def getAllItems():
+    return db.items.find()
