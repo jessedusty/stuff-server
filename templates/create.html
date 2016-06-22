@@ -39,7 +39,7 @@
                   </tr>
                   <tr>
                      <!--<td>Contianed in</td><td><input type="text" class="form-control" name="parent" placeholder="unknown" /></td>-->
-                     <td>Contained in</td><td><input type="text" id="ajax" list="json-datalist" placeholder="key of container" style="color:black"><datalist id="json-datalist"></datalist></td>
+                     <td>Contained in</td><td><input type="text" id="ajax" list="json-datalist" placeholder="key of container" style="color:black" name="parent"><datalist id="json-datalist"></datalist></td>
                   </tr>
                 </table>
 
@@ -80,6 +80,7 @@
     };
     httpRequest.open('GET', "/ajax/keys.json");
     httpRequest.send();
+
 
   });
 
