@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<section>
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 text-center">
+              <h2 class="section-heading">Edit item : {{info.key}}</h2> <br>
+              <style>
+                td {
+                  padding: 10px;
+                  font-size: 25px;
+                }
+              </style>
+              <form role="form" action="/edit/{{info.key}}" method="POST" enctype="multipart/form-data">
+                <style>
+                  .form-control {
+                    width:100%;
+                    margin: auto;
+                  }
+                  input {
+                    margin: 10px;
+                  }
+                </style>
+                <hr>
+                <table align="center" style="text-align:left">
+                  <tr>
+                    <td>Key</td><td><input type="text" class="form-control" name="key" placeholder="Identifier" value="{{ info.key }}"> </td>
+                  </tr>
+                  <tr>
+                    <td>Title</td><td><input type="text" class="form-control" name="title" placeholder="Title" value="{{info.title}}"> </td>
+                  </tr>
+                  <tr>
+                    <td>Description</td><td><textarea rows="4" name="description" cols="15" class="form-control">{{info.description}}</textarea></td>
+                  </tr>
+<!--
+                  <tr>
+                    <td>Image</td><td><input type="file" class="form-control" name="picture" /></td>
+                  </tr> --> 
+                  <tr>
+                     <!--<td>Contianed in</td><td><input type="text" class="form-control" name="parent" placeholder="unknown" /></td>-->
+                     <td>Contained in</td><td><input type="text" id="ajax" list="json-datalist" placeholder="key of container" style="color:black" name="parent" value="{{info.parent}}"><datalist id="json-datalist"></datalist></td>
+                  </tr>
+                </table>
+
+                <input type="submit" class="btn btn-info btn-xl" value="Update Item">
+              </form>
+
+
+
+          </div>
+      </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block script %}
+  <script>
+  $(document).ready(function () {
+    // TODO: remove debuging code and revert back to using the JQuery Library
+    httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function(){
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        // everything is good, the response is received
+        console.log("good");
+        console.log(httpRequest.responseText);
+        var object = jQuery.parseJSON(httpRequest.responseText).keys;
+        console.log(object);
+        $("#json-datalist").empty();
+        for(var i=0;i<object.length;i++)
+        {
+            $("#json-datalist").append("<option value='" +
+            object[i] + "'></option>");
+        }
+      } else {
+          // still not ready
+          console.log("no good");
+      }
+    };
+    httpRequest.open('GET', "/ajax/keys.json");
+    httpRequest.send();
+
+
+  });
+
+  </script>
+
+{% endblock %}

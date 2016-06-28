@@ -25,6 +25,9 @@ def insertItem(info):
     db.items.insert_one(info)
 
 
+def updateItem(identifier, info):
+    db.items.update({"key":identifier}, info)
+
 def handlePOST(request_form):
     d =  dict(request_form)
     nd = {}

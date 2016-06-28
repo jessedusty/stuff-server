@@ -98,5 +98,28 @@ def list_items():
 	return render_template("list.html", items=model.getAllItems())
 
 
+@app.route("/edit/<identifier>", methods=["GET", "POST"])
+def edit_item(identifier): 
+	if request.method == "POST":
+		data = model.handlePOST(request.form)
+		model.updateItem(identifier, data)
+		return redirect(url_for("show_object_for_key", identifer=identifier))
+	else:
+		return render_template("edit.html", info=model.infoForItem(identifier))
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
