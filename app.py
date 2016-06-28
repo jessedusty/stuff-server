@@ -27,12 +27,12 @@ app.secret_key = 'development key'
 HOST_URL = "http://192.168.99.100/"
 
 
-@app.route('/key/<identifer>')
-def show_object_for_key(identifer):
-	if not model.itemExists(identifer):
-		return redirect(url_for("insert_item", identifer=identifer))
+@app.route('/key/<identifier>')
+def show_object_for_key(identifier):
+	if not model.itemExists(identifier):
+		return redirect(url_for("insert_item", identifier=identifer))
 
-	return render_template("id.html", info=model.infoForItem(identifer))
+	return render_template("id.html", info=model.infoForItem(identifier))
 
 
 @app.route('/ajax/keys.json')
@@ -48,17 +48,17 @@ def add_unknown_item():
 
 		model.insertItem(data)
 
-		return redirect(url_for("show_object_for_key", identifer=request.form["key"]))
+		return redirect(url_for("show_object_for_key", identifier=request.form["key"]))
 	else:
-		return render_template("create.html", identifer="")
+		return render_template("create.html", identifier="")
 
 
-@app.route('/add/<identifer>')
-def insert_item(identifer):
-	if model.itemExists(identifer):
-		return redirect(url_for("show_object_for_key", identifer=identifer))
+@app.route('/add/<identifier>')
+def insert_item(identifier):
+	if model.itemExists(identifier):
+		return redirect(url_for("show_object_for_key", identifier=identifer))
 	else:
-		return render_template("create.html", identifer=identifer)
+		return render_template("create.html", identifier=identifer)
 
 
 @app.route("/")
@@ -71,16 +71,16 @@ def print_page():
 	return render_template("print.html")
 
 
-@app.route("/print/<identifer>")
-def generate_label(identifer):
-	return render_template("label.txt", info=model.infoForItem(identifer))
+@app.route("/print/<identifier>")
+def generate_label(identifier):
+	return render_template("label.txt", info=model.infoForItem(identifier))
 
 # print label command to implement - curl 192.168.99.100/print/test > /dev/tcp/10.0.0.51/2501
 
 
-@app.route('/image/<identifer>')
-def get_upload(identifer):
-	return Response(model.fs.get(ObjectId(identifer)).read(), content_type=model.fs.get(ObjectId(identifer)).content_type)
+@app.route('/image/<identifier>')
+def get_upload(identifier):
+	return Response(model.fs.get(ObjectId(identifier)).read(), content_type=model.fs.get(ObjectId(identifer)).content_type)
 
 
 @app.route('/uploads', methods=['POST'])
@@ -103,7 +103,7 @@ def edit_item(identifier):
 	if request.method == "POST":
 		data = model.handlePOST(request.form)
 		model.updateItem(identifier, data)
-		return redirect(url_for("show_object_for_key", identifer=identifier))
+		return redirect(url_for("show_object_for_key", identifier=identifier))
 	else:
 		return render_template("edit.html", info=model.infoForItem(identifier))
 

@@ -8,15 +8,15 @@ client = MongoClient("mongodb://db")
 db = client.stuff
 fs = gridfs.GridFS(db)
 
-def infoForItem(identifer):
-    index = db.items.find({"key":identifer})
+def infoForItem(identifier):
+    index = db.items.find({"key":identifier})
     if index.count() <= 0:
         return None
     return index[0]
 
 
-def itemExists(identifer):
-    index = db.items.find({"key":identifer})
+def itemExists(identifier):
+    index = db.items.find({"key":identifier})
     if index.count() > 0: return True
     return False
 
